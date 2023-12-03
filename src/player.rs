@@ -1,4 +1,4 @@
-use bevy_rapier2d::prelude::*;
+// use bevy_rapier2d::prelude::*;
 use bevy::prelude::*;
 
 #[derive(Clone, Eq, PartialEq, Debug, Default, Component)]
@@ -6,10 +6,9 @@ pub struct Player;
 
 #[derive(Bundle)]
 pub struct PlayerBundle {
-    player:Player,
+    player: Player,
     sprite: SpriteBundle,
 }
-
 
 // This function is a very basic movement system that does not incorporate collisions and physics that can be found in Rapier
 
@@ -18,7 +17,7 @@ pub struct PlayerBundle {
 pub fn player_movement(
     input: Res<Input<KeyCode>>,
     mut query: Query<(&mut Transform, &Sprite), With<Player>>,
-    time: Res<Time>
+    time: Res<Time>,
 ) {
     for (mut transform, _) in &mut query {
         if input.pressed(KeyCode::W) {
@@ -38,18 +37,17 @@ pub fn player_movement(
 
 //This is a very basic player spawn implementation
 
-pub fn spawn_player(
-    mut commands: Commands, asset_server: Res<AssetServer>
-){
-
+pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let scale = 0.25;
 
-    commands.spawn(SpriteBundle {
-        texture: asset_server.load("tempWhale.png"),
-        transform: Transform {
-            scale: Vec3::new(scale, scale, 1.0),
+    commands
+        .spawn(SpriteBundle {
+            texture: asset_server.load("tempWhale.png"),
+            transform: Transform {
+                scale: Vec3::new(scale, scale, 1.0),
+                ..Default::default()
+            },
             ..Default::default()
-        },
-        ..Default::default()
-    }).insert(Player);
+        })
+        .insert(Player);
 }

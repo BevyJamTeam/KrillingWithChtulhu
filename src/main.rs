@@ -10,7 +10,7 @@ mod player;
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use player::{spawn_player, player_movement};
+use player::{player_movement, spawn_player};
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
