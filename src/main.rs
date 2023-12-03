@@ -17,14 +17,14 @@ pub enum GameState {
     Active,
 }
 
-fn setup(mut commands: Commands) {
-    let mut camera = Camera2dBundle::default();
-    camera.projection.scaling_mode = ScalingMode::AutoMin {
-        min_width: 256.,
-        min_height: 144.,
-    };
-    commands.spawn(camera);
-}
+// fn setup(mut commands: Commands) {
+//     let mut camera = Camera2dBundle::default();
+//     camera.projection.scaling_mode = ScalingMode::AutoMin {
+//         min_width: 256.,
+//         min_height: 144.,
+//     };
+//     commands.spawn(camera);
+// }
 
 /// This example demonstrates how to load a texture atlas from a sprite sheet
 ///
