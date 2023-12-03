@@ -545,13 +545,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_ci_template"
-version = "0.1.0"
-dependencies = [
- "bevy",
-]
-
-[[package]]
 name = "bevy_core"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
