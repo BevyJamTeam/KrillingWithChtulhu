@@ -5,10 +5,12 @@
 #![allow(clippy::too_many_arguments, clippy::type_complexity)]
 
 mod assets;
+mod player;
 
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use player::{spawn_player, player_movement};
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
@@ -38,13 +40,15 @@ fn main() {
         // Main Plugins
         .add_plugins(assets::AssetsPlugin)
         .add_systems(Startup, setup)
+        .add_systems(Update, player_movement)
         .run();
 }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
-    commands.spawn(SpriteBundle {
-        texture: asset_server.load("icon.png"),
-        ..Default::default()
-    });
+    // commands.spawn(SpriteBundle {
+    //     texture: asset_server.load("icon.png"),
+    //     ..Default::default()
+    // });
+    spawn_player(commands, asset_server);
 }
