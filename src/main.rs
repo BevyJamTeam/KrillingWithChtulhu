@@ -44,11 +44,20 @@ fn main() {
         .run();
 }
 
+// fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+//     commands.spawn(Camera2dBundle::default());
+//     commands.spawn(SpriteBundle {
+//         texture: asset_server.load("icon.png"),
+//         ..Default::default()
+//     });
+// }
+
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    commands.spawn(Camera2dBundle::default());
-    // commands.spawn(SpriteBundle {
-    //     texture: asset_server.load("icon.png"),
-    //     ..Default::default()
-    // });
+    let mut camera = Camera2dBundle::default();
+    camera.projection.scaling_mode = ScalingMode::AutoMin {
+        min_width: 256.,
+        min_height: 144.,
+    };
+    commands.spawn(camera);
     spawn_player(commands, asset_server);
 }
