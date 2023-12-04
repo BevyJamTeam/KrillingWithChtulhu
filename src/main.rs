@@ -6,11 +6,13 @@
 
 mod assets;
 mod player;
+mod basic_map;
 
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use player::{player_movement, spawn_player};
+use basic_map::floor;
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
@@ -40,6 +42,7 @@ fn main() {
         // Main Plugins
         .add_plugins(assets::AssetsPlugin)
         .add_systems(Startup, setup)
+        .add_systems(Startup, floor)
         .add_systems(Update, player_movement)
         .run();
 }
