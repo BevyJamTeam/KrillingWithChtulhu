@@ -42,7 +42,8 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     commands
         .spawn(SpriteBundle {
-            texture: asset_server.load("../assets/kenney_fish-pack/PNG/default_size/fishTile_103.png"),
+            texture: asset_server
+                .load("../assets/kenney_fish-pack/PNG/default_size/fishTile_103.png"),
             transform: Transform {
                 scale: Vec3::new(scale, scale, 1.0),
                 ..Default::default()
