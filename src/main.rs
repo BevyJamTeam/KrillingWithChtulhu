@@ -19,15 +19,6 @@ pub enum GameState {
     Active,
 }
 
-// fn setup(mut commands: Commands) {
-//     let mut camera = Camera2dBundle::default();
-//     camera.projection.scaling_mode = ScalingMode::AutoMin {
-//         min_width: 256.,
-//         min_height: 144.,
-//     };
-//     commands.spawn(camera);
-// }
-
 /// This example demonstrates how to load a texture atlas from a sprite sheet
 ///
 /// Requires the feature '2d'
@@ -43,14 +34,6 @@ fn main() {
         .add_systems(Update, player_movement)
         .run();
 }
-
-// fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-//     commands.spawn(Camera2dBundle::default());
-//     commands.spawn(SpriteBundle {
-//         texture: asset_server.load("icon.png"),
-//         ..Default::default()
-//     });
-// }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let mut camera = Camera2dBundle::default();

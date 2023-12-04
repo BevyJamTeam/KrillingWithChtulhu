@@ -1,4 +1,3 @@
-// use bevy_rapier2d::prelude::*;
 use bevy::prelude::*;
 
 #[derive(Clone, Eq, PartialEq, Debug, Default, Component)]
