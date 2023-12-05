@@ -41,15 +41,12 @@ pub struct AssetsPlugin;
 
 impl Plugin for AssetsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_loading_state(
-            LoadingState::new(GameState::Loading).continue_to_state(GameState::Active),
-        )
-        .add_collection_to_loading_state::<_, ImageAssets>(GameState::Loading)
-        .add_systems(OnEnter(GameState::Active), draw_fish)
-        .add_systems(
-            Update,
-            animate_sprite_system.run_if(in_state(GameState::Active)),
-        );
+        app.add_collection_to_loading_state::<_, ImageAssets>(GameState::Loading)
+            .add_systems(OnEnter(GameState::Active), draw_fish)
+            .add_systems(
+                Update,
+                animate_sprite_system.run_if(in_state(GameState::Active)),
+            );
     }
 }
 
@@ -82,7 +79,7 @@ fn draw_fish(mut commands: Commands, image_assets: Res<ImageAssets>) {
                 ..Default::default()
             },
             //sprite: TextureAtlasSprite::new(0),
-            texture: image_assets.krill.clone(),
+            texture: image_assets.puffer_fish.clone(),
             ..Default::default()
         },
         Name::new("puffer_fish"),
