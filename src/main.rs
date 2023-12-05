@@ -5,15 +5,17 @@
 #![allow(clippy::too_many_arguments, clippy::type_complexity)]
 
 mod assets;
-mod player;
 mod map;
+mod player;
 
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use bevy_rapier2d::prelude::{ RapierPhysicsPlugin, NoUserData, RapierConfiguration, Vect, RapierDebugRenderPlugin};
+use bevy_rapier2d::prelude::{
+    NoUserData, RapierConfiguration, RapierDebugRenderPlugin, RapierPhysicsPlugin, Vect,
+};
+use map::{ceiling, floor, left_wall, right_wall};
 use player::{player_movement, spawn_player};
-use map::{floor, ceiling, left_wall, right_wall};
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
@@ -33,7 +35,7 @@ fn main() {
         .add_plugins(WorldInspectorPlugin::new())
         //Rapier Physics engine
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
-        .insert_resource(RapierConfiguration{
+        .insert_resource(RapierConfiguration {
             gravity: Vect::ZERO,
             ..Default::default()
         })
@@ -46,7 +48,6 @@ fn main() {
         .add_systems(Startup, left_wall)
         .add_systems(Startup, right_wall)
         .add_systems(Startup, ceiling)
-
         .add_systems(Update, player_movement)
         .run();
 }

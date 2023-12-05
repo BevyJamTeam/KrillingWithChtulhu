@@ -1,5 +1,5 @@
-use bevy_rapier2d::prelude::*;
 use bevy::prelude::*;
+use bevy_rapier2d::prelude::*;
 
 #[derive(Clone, Eq, PartialEq, Debug, Default, Component)]
 pub struct Player;
@@ -40,8 +40,11 @@ pub fn player_movement(
 pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let scale = 0.25;
 
-    commands
-        .spawn((Player, Collider::cuboid(2.0, 2.0), RigidBody::Dynamic, SpriteBundle {
+    commands.spawn((
+        Player,
+        Collider::cuboid(2.0, 2.0),
+        RigidBody::Dynamic,
+        SpriteBundle {
             texture: asset_server
                 .load("../assets/kenney_fish-pack/PNG/default_size/fishTile_103.png"),
             transform: Transform {
@@ -55,8 +58,6 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
         Damping {
             linear_damping: 3.0,
             angular_damping: 3.0,
-
-        }
-        ));
-
+        },
+    ));
 }
