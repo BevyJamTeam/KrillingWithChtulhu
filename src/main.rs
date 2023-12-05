@@ -11,6 +11,7 @@ mod player;
 
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
+use bevy_asset_loader::loading_state::{LoadingState, LoadingStateAppExt};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_rapier2d::prelude::{
     NoUserData, RapierConfiguration, RapierDebugRenderPlugin, RapierPhysicsPlugin, Vect,
@@ -35,6 +36,9 @@ pub struct DebugEvent;
 fn main() {
     App::new()
         .add_state::<GameState>()
+        .add_loading_state(
+            LoadingState::new(GameState::Loading).continue_to_state(GameState::Active),
+        )
         .add_plugins(DefaultPlugins)
         // Development Plugins
         .add_plugins(WorldInspectorPlugin::new())
