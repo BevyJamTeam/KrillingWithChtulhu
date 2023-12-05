@@ -51,13 +51,13 @@ fn main() {
         .add_plugins(KrillPlugin)
         .add_event::<DebugEvent>()
         .add_systems(Startup, setup)
-        .add_systems(Update, (player_movement, debug))
+        // .add_systems(Update, (player_movement, debug))
         //This all below can be wrapped in a plugin, but I wanted to pump out this code as I've been on it for hours.
         .add_systems(Startup, floor)
         .add_systems(Startup, left_wall)
         .add_systems(Startup, right_wall)
         .add_systems(Startup, ceiling)
-        .add_systems(Update, player_movement)
+        .add_systems(Update, (player_movement, debug))
         .run();
 }
 
