@@ -22,13 +22,6 @@ use player::PlayerPlugin;
 
 #[cfg(feature = "debug")]
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use bevy_rapier2d::prelude::{
-    NoUserData, RapierConfiguration, RapierDebugRenderPlugin, RapierPhysicsPlugin, Vect,
-};
-use krill::KrillPlugin;
-use map::{ceiling, floor, left_wall, right_wall};
-use player::{player_movement, spawn_player};
-
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
     #[default]
