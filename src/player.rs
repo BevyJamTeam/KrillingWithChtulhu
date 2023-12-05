@@ -1,4 +1,4 @@
-// use bevy_rapier2d::prelude::*;
+use bevy_rapier2d::prelude::*;
 use bevy::prelude::*;
 
 #[derive(Clone, Eq, PartialEq, Debug, Default, Component)]
@@ -41,7 +41,7 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let scale = 0.25;
 
     commands
-        .spawn(SpriteBundle {
+        .spawn((Player, Collider::cuboid(2.0, 2.0), RigidBody::Dynamic, SpriteBundle {
             texture: asset_server
                 .load("../assets/kenney_fish-pack/PNG/default_size/fishTile_103.png"),
             transform: Transform {
@@ -49,6 +49,14 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
                 ..Default::default()
             },
             ..Default::default()
-        })
-        .insert(Player);
+        },
+        //This is the specific area, where you can adjust the bouncing off of walls
+        // You can add and play with much more here in regards to physics
+        Damping {
+            linear_damping: 3.0,
+            angular_damping: 3.0,
+
+        }
+        ));
+
 }
