@@ -11,14 +11,13 @@ mod physics;
 mod player;
 
 use assets::AssetsPlugin;
-// use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_asset_loader::loading_state::{LoadingState, LoadingStateAppExt};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use krill::KrillPlugin;
 use map::MapPlugin;
 use physics::PhysicsPlugin;
-use player::{player_movement, spawn_player};
+use player::PlayerPlugin;
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
@@ -45,23 +44,22 @@ fn main() {
         // Main Plugins
         .add_plugins(PhysicsPlugin)
         .add_plugins(AssetsPlugin)
+        .add_plugins(PlayerPlugin)
         .add_plugins(KrillPlugin)
         .add_plugins(MapPlugin)
         .add_event::<DebugEvent>()
         .add_systems(Startup, setup)
-        //This all below can be wrapped in a plugin, but I wanted to pump out this code as I've been on it for hours.
-        .add_systems(Update, (player_movement, debug))
+        .add_systems(Update, debug)
         .run();
 }
 
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+fn setup(mut commands: Commands) {
     let mut camera = Camera2dBundle::default();
     camera.projection.scaling_mode = ScalingMode::AutoMin {
         min_width: 256.,
         min_height: 144.,
     };
     commands.spawn(camera);
-    spawn_player(commands, asset_server);
 }
 
 pub fn debug(keyboard_input: Res<Input<KeyCode>>, mut debug_event_writer: EventWriter<DebugEvent>) {
