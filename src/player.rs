@@ -1,5 +1,6 @@
 use bevy::prelude::*;
-use bevy_inspector_egui::egui::Key;
+//the below is throwing an un-used complaint so I commented it out
+// use bevy_inspector_egui::egui::Key;
 use bevy_rapier2d::prelude::*;
 
 const PLAYER_SPEED: f32 = 50.0;
@@ -92,20 +93,23 @@ pub fn spawn_laser(
 ) {
     if input.just_pressed(KeyCode::Space) {
         if let Ok(player_transform) = query.get_single() {
-            commands.spawn(SpriteBundle {
-                sprite: Sprite {
-                    color: Color::RED,
-                    custom_size: Some(Vec2::new(5.0, 15.0)),
+            commands
+                .spawn(SpriteBundle {
+                    sprite: Sprite {
+                        color: Color::RED,
+                        custom_size: Some(Vec2::new(5.0, 15.0)),
+                        ..default()
+                    },
+                    transform: Transform {
+                        translation: player_transform.translation + Vec3::Y * 20.0,
+                        ..default()
+                    },
                     ..default()
-                },
-                transform: Transform {
-                    translation: player_transform.translation + Vec3::Y * 20.0,
-                    ..default()
-                },
-                ..default()
-            })
-            .insert(Laser)
-            .insert(Velocity { linvel: Vec2::new(0.0, LASER_SPEED)});
+                })
+                .insert(Laser)
+                .insert(Velocity {
+                    linvel: Vec2::new(0.0, LASER_SPEED),
+                });
         }
     }
 }
