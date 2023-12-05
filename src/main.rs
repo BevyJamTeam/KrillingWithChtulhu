@@ -12,10 +12,10 @@ mod player;
 // use assets::AssetsPlugin;
 use bevy::{prelude::*, render::camera::ScalingMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use krill::KrillPlugin;
 use bevy_rapier2d::prelude::{
     NoUserData, RapierConfiguration, RapierDebugRenderPlugin, RapierPhysicsPlugin, Vect,
 };
+use krill::KrillPlugin;
 use map::{ceiling, floor, left_wall, right_wall};
 use player::{player_movement, spawn_player};
 
