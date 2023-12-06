@@ -18,8 +18,6 @@ struct Velocity {
     linvel: Vec3,
 }
 
-
-
 #[derive(Bundle)]
 pub struct PlayerBundle {
     player: Player,
@@ -119,7 +117,6 @@ fn despawn(mut commands: Commands, query: Query<(Entity, &GlobalTransform)>) {
         }
     }
 }
-
 
 fn velocity(time: Res<Time>, mut query: Query<(&Velocity, &mut Transform)>) {
     for (velocity, mut transform) in query.iter_mut() {

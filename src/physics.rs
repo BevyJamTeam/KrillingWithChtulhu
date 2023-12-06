@@ -13,7 +13,7 @@ impl Plugin for PhysicsPlugin {
                 ..Default::default()
             })
             .add_plugins(RapierDebugRenderPlugin::default())
-            .add_systems(Update,  velocity);
+            .add_systems(Update, velocity);
     }
 }
 
@@ -21,8 +21,6 @@ impl Plugin for PhysicsPlugin {
 pub struct Velocity {
     linvel: Vec3,
 }
-
-
 
 pub fn velocity(time: Res<Time>, mut query: Query<(&Velocity, &mut Transform)>) {
     for (velocity, mut transform) in query.iter_mut() {
