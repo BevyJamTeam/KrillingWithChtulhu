@@ -24,7 +24,6 @@ use player::PlayerPlugin;
 
 #[cfg(feature = "debug")]
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-
 #[derive(Clone, Eq, PartialEq, Debug, Hash, Default, States)]
 pub enum GameState {
     #[default]
